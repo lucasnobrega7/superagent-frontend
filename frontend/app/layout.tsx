@@ -1,4 +1,5 @@
 import './globals.css'
+import './fixes.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
@@ -16,8 +17,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <main className="min-h-screen">
+      <body className={`${inter.className} antialiased`}>
+        <main className="min-h-screen w-full max-w-full">
           {children}
         </main>
       </body>

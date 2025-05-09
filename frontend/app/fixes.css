@@ -1,0 +1,62 @@
+/* Reset CSS for fixing layout problems */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Fix for mobile responsiveness */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  body {
+    position: relative;
+  }
+
+  textarea, input {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+
+  .dashboard-container {
+    padding: 0;
+  }
+
+  .content-container {
+    padding: 0.5rem;
+  }
+}
+
+/* Fix for dashboard layout */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Ensure proper content spacing */
+.content-container {
+  padding: 1rem;
+  width: 100%;
+  max-width: 100%;
+}

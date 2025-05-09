@@ -1,4 +1,4 @@
-import { authMiddleware, clerkClient } from "@clerk/nextjs";
+import { clerkMiddleware, clerkClient } from "@clerk/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 // Limite de requisições por minuto por IP
@@ -83,7 +83,7 @@ function checkRateLimit(request: NextRequest): boolean {
 }
 
 // Wrapper para middleware Clerk com segurança adicional
-export default authMiddleware({
+export default clerkMiddleware({
   // Rotas que podem ser acessadas sem autenticação
   publicRoutes: [
     "/",

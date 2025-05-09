@@ -61,23 +61,23 @@ export default function AgentChatInterface({ agentId, userId }: AgentChatInterfa
   };
 
   return (
-    <div className="flex flex-col h-screen max-h-screen">
+    <div className="flex flex-col h-screen max-h-screen w-full overflow-hidden">
       {/* Include the monitoring component */}
-      <ChatMonitoring 
-        agentId={agentId} 
-        userId={userId} 
-        onThreadCreated={id => setThreadId(id)} 
+      <ChatMonitoring
+        agentId={agentId}
+        userId={userId}
+        onThreadCreated={id => setThreadId(id)}
       />
-      
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 w-full">
         {messages.map((message, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className={`p-3 rounded-lg ${
-              message.role === 'user' 
-                ? 'bg-blue-100 ml-auto max-w-md' 
-                : message.role === 'assistant' 
-                  ? 'bg-gray-100 max-w-md' 
+              message.role === 'user'
+                ? 'bg-blue-100 ml-auto max-w-md'
+                : message.role === 'assistant'
+                  ? 'bg-gray-100 max-w-md'
                   : 'bg-yellow-100 text-sm max-w-md mx-auto'
             }`}
           >
@@ -87,19 +87,19 @@ export default function AgentChatInterface({ agentId, userId }: AgentChatInterfa
         <div ref={messagesEndRef} />
       </div>
       
-      <div className="border-t p-4">
-        <div className="flex space-x-2">
+      <div className="border-t p-4 w-full">
+        <div className="flex space-x-2 w-full">
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Type your message here..."
-            className="flex-1 p-2 border rounded-md"
+            className="flex-1 p-2 border rounded-md w-full"
             rows={2}
           />
           <button
             onClick={handleSendMessage}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md"
+            className="px-4 py-2 bg-blue-500 text-white rounded-md whitespace-nowrap"
           >
             Send
           </button>

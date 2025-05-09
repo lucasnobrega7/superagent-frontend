@@ -6,10 +6,10 @@ export default function ChatPage() {
   const demoUserId = 'user-demo-456';
   
   return (
-    <div className="container mx-auto p-4 h-screen">
+    <div className="w-full max-w-6xl mx-auto p-4 h-screen">
       <h1 className="text-2xl font-bold mb-4">Chat with Agent</h1>
-      <div className="h-[calc(100vh-120px)] border rounded-lg overflow-hidden">
-        <AgentChatInterface 
+      <div className="h-[calc(100vh-120px)] border rounded-lg overflow-hidden w-full">
+        <AgentChatInterface
           agentId={demoAgentId}
           userId={demoUserId}
         />
