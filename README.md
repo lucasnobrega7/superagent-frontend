@@ -1,5 +1,8 @@
 # Superagent Frontend with Firebase and Turbo
 
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://superagent-frontend.vercel.app)
+[![CI/CD Status](https://github.com/lucasnobrega7/superagent-frontend/actions/workflows/turbo-ci.yml/badge.svg)](https://github.com/lucasnobrega7/superagent-frontend/actions/workflows/turbo-ci.yml)
+
 Este projeto integra Firebase Cloud Functions com um frontend Next.js para Superagent, utilizando Turborepo para otimização de build.
 
 ## Início Rápido
@@ -119,3 +122,12 @@ Antes de implantar em produção, consulte nosso [Checklist de Produção](./doc
 - Otimização de custos
 
 Para situações de emergência, siga nosso [Plano de Resposta a Incidentes](./docs/INCIDENT_RESPONSE_PLAN.md).
+
+## Deploy no GitHub e Vercel
+
+Este projeto está configurado para CI/CD automático com GitHub Actions e Vercel:
+
+- Cada push para `main` dispara um build e deploy em produção
+- Cada pull request cria um ambiente de preview
+
+Para configuração desta integração, consulte o [Guia de Integração GitHub+Vercel](./README-GITHUB-VERCEL.md).
