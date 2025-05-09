@@ -1,0 +1,20 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["NODE_ENV", "FIREBASE_CONFIG", "NEXT_PUBLIC_*"],
+  "tasks": {
+    "build": {
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "lint": {},
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "start": {
+      "dependsOn": ["build"]
+    },
+    "test": {
+      "outputs": ["coverage/**"]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+# Security Policy
+Contact: mailto:security@literalai.com
+Expires: 2025-05-01T00:00:00.000Z
+Preferred-Languages: pt, en
+Canonical: https://agentesdeconversao.com.br/.well-known/security.txt
+Policy: https://agentesdeconversao.com.br/security-policy
+Hiring: https://agentesdeconversao.com.br/careers

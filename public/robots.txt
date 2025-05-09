@@ -1,0 +1,33 @@
+User-agent: *
+Allow: /
+
+# Disallow sensitive paths
+Disallow: /api/
+Disallow: /dashboard/admin/
+Disallow: /internal/
+Disallow: /superagent/
+Disallow: /tracking/
+Disallow: /firebase-test/
+Disallow: /api-test/
+
+# Block scanning bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: ScreamingFrogSEOSpider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://agentesdeconversao.com.br/sitemap.xml

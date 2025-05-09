@@ -1,0 +1,4 @@
+# This file is a redirect to the canonical location
+# Please see /.well-known/security.txt for the actual content
+Contact: mailto:security@literalai.com
+Canonical: https://agentesdeconversao.com.br/.well-known/security.txt
