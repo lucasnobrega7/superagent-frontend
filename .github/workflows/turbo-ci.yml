@@ -1,4 +1,4 @@
-name: Turbo CI
+name: Turbo CI/CD
 
 on:
   push:
@@ -7,21 +7,22 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - uses: actions/checkout@v3
-      
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Cache Turbo build
         uses: actions/cache@v3
         with:
@@ -29,12 +30,33 @@ jobs:
           key: ${{ runner.os }}-turbo-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-turbo-
-      
+
       - name: Build
         run: npm run turbo:build
-      
+
       - name: Lint
         run: npm run turbo:lint || true
-      
+
       - name: Test
         run: npm run turbo:test || true
+
+      - name: Deploy to Vercel (Preview)
+        if: github.event_name == 'pull_request'
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+
+      - name: Deploy to Vercel (Production)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+          vercel-args: '--prod'
