@@ -6,13 +6,9 @@
   "framework": "nextjs",
   "outputDirectory": ".next",
   "functions": {
-    "api/functions/**/*.js": {
+    "api/**/*.js": {
       "memory": 1024,
       "maxDuration": 60
-    },
-    "api/**/*.ts": {
-      "memory": 1024,
-      "maxDuration": 10
     }
   },
   "rewrites": [
