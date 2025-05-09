@@ -35,7 +35,7 @@ jobs:
         run: npm run turbo:build
 
       - name: Lint
-        run: npm run turbo:lint || true
+        run: npm run turbo:lint -- --max-warnings=100 || true
 
       - name: Test
         run: npm run turbo:test || true

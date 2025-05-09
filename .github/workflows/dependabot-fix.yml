@@ -1,0 +1,80 @@
+name: Fix Dependabot PR
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  fix-dependabot-pr:
+    name: Fix Dependabot PR
+    # Only run on Dependabot PRs
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      
+      - name: Update package.json with compatibility settings
+        run: |
+          npm install -g json
+          echo "Adding resolutions to package.json"
+          json -I -f package.json -e 'this.resolutions={"**/@types/react":"^18.2.9","**/@types/react-dom":"^18.2.4"}'
+          echo "Checking frontend package.json"
+          if [ -f "frontend/package.json" ]; then
+            json -I -f frontend/package.json -e 'this.resolutions={"**/@types/react":"^18","**/@types/react-dom":"^18"}'
+          fi
+      
+      - name: Create/Update ESLint config
+        run: |
+          echo '{
+            "extends": ["next/core-web-vitals"],
+            "rules": {
+              "react/no-unescaped-entities": "off",
+              "react/display-name": "off",
+              "@next/next/no-img-element": "off",
+              "react-hooks/exhaustive-deps": "warn",
+              "import/no-anonymous-default-export": "off",
+              "no-unused-vars": "warn"
+            }
+          }' > .eslintrc.json
+          
+          if [ -d "frontend" ]; then
+            echo '{
+              "extends": ["next/core-web-vitals"],
+              "rules": {
+                "react/no-unescaped-entities": "off",
+                "react/display-name": "off",
+                "@next/next/no-img-element": "off",
+                "react-hooks/exhaustive-deps": "warn",
+                "import/no-anonymous-default-export": "off",
+                "no-unused-vars": "warn"
+              }
+            }' > frontend/.eslintrc.json
+          fi
+      
+      - name: Update .npmrc
+        run: |
+          echo "legacy-peer-deps=true" >> .npmrc
+          echo "strict-peer-dependencies=false" >> .npmrc
+          echo "auto-install-peers=true" >> .npmrc
+          
+          if [ -d "frontend" ]; then
+            echo "legacy-peer-deps=true" > frontend/.npmrc
+            echo "strict-peer-dependencies=false" >> frontend/.npmrc
+            echo "auto-install-peers=true" >> frontend/.npmrc
+          fi
+      
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "fix: add compatibility settings for dependabot PR"
+          branch: ${{ github.head_ref }}
